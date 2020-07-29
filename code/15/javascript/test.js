@@ -2,7 +2,7 @@
  * @param {number[]} nums
  * @return {number[][]}
  */
-//超出时间限制，我的天，白写了（也没算写，评论区里全是人才）
+//超出时间限制，我的天，白写了（也没白写，评论区里全是人才）
 var threeSum = function(nums) {
     let res = []
     let flag = 0

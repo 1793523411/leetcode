@@ -13,6 +13,7 @@ func threeSum(nums []int) [][]int {
 			break
 		}
 		p1, p2 := i+1, len(nums)-1
+		//如果只有两个元素，不会执行循环
 		for p1 < p2 {
 			sum := s + nums[p1] + nums[p2]
 			if sum < 0 {
@@ -32,7 +33,7 @@ func threeSum(nums []int) [][]int {
 				p2--
 			}
 		}
-		//这一步判断数组的元素是否大于三等于，和去重，也可判断元素数量放在循环外面，去重放在循环开头用continue
+		//这一步判断数组的元素是否大于三等于,，和去重，也可判断元素数量放在循环外面，去重放在循环开头用continue,遍历后三个元素不进入循环
 		for i < len(nums)-3 && nums[i] == nums[i+1] {
 			i++
 		}
