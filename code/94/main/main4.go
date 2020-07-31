@@ -2,6 +2,18 @@ package main
 
 import()
 
+/*
+在 解法三 Morris 破坏树结构 中
+
+    我们为了避免下一次遍历到root时，再进入到左子树，直接砍左子树
+
+为了解决砍树问题，我们可以在 解法三 Morris 破坏树结构 的基础上，增加
+
+    在下次遍历到 root 时，直接把 root加入结果
+    移动到root.Right 就可以避免再进入到左子树的死循环
+
+*/
+
 func inorderTraversal4(root *TreeNode) []int {
 	var res []int
 	var max *TreeNode

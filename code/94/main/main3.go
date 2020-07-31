@@ -2,6 +2,14 @@ package main
 
 import()
 
+/*
+在 解法一 递归 解法二 迭代（stack) 中，必须借助 stack 来实现 中序遍历，增加空间复杂度 O(n)
+Morris 则在现有节点上进行节点关联，从而避免了 stack 空间复杂度 O(n) 的问题
+
+    寻找左子树 最大节点 指向当前节点
+    砍掉 当前节点 的 左子树
+
+*/
 func inorderTraversal3(root *TreeNode) []int {
 	var res []int
 	var max *TreeNode
