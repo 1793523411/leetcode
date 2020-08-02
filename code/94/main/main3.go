@@ -10,6 +10,7 @@ Morris 则在现有节点上进行节点关联，从而避免了 stack 空间复
     砍掉 当前节点 的 左子树
 
 */
+//java中的解法三：莫里斯遍历
 func inorderTraversal3(root *TreeNode) []int {
 	var res []int
 	var max *TreeNode
