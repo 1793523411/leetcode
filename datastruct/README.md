@@ -80,3 +80,17 @@ int* buildNext(char* P) { // 构造模式串 P 的 next 表
 + 双指针技巧：从两端向中间迭代数组，经常在排序数组中使用
 + 比如反转数组中的元素，经典双指针问题，
 + 双指针的方法可以相同也可以不同，上面做的都是反方向的双指针，接下来该同方向的双指针了，即快慢指针，明天开启这一篇章
++ 解决这类问题的关键是: 确定两个指针的移动策略。
++ 与前一个场景类似，你有时可能需要在使用双指针技巧之前对数组进行排序，也可能需要运用贪心法则来决定你的运动策略
+
+快慢指针实例：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度
+```python
+def removeElement(self, nums: List[int], val: int) -> int:
+    slow = 0
+    n = len(nums)
+    for fast in range(n):
+        if nums[fast] != val:
+            nums[slow] = nums[fast]
+            slow += 1
+    return slow
+```
