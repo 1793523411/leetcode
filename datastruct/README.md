@@ -96,3 +96,18 @@ def removeElement(self, nums: List[int], val: int) -> int:
 ```
 
 + 我们可以调用内置函数来对数组进行排序。但是，理解一些广泛使用的排序算法的原理及其复杂度是很有用的，二分查找是一种重要的技术，用于在排序数组中搜索特定的元素，双指针技巧有时与贪心算法有关，它可以帮助我们设计指针的移动策略
+
+## 链表
+
++ 单链表的基本结构
+
+```java
+// Definition for singly-linked list.
+public class SinglyListNode {
+    int val;
+    SinglyListNode next;
+    SinglyListNode(int x) { val = x; }
+}
+```
+
++ 给定一个链表，判断链表中是否有环？引出双指针，在链表中使用两个速度不同的指针，这两个指针的适当速度应该是多少？一个安全的选择是每次移动慢指针一步，而移动快指针两步。每一次迭代，快速指针将额外移动一步。如果环的长度为 M，经过 M 次迭代后，快指针肯定会多绕环一周，并赶上慢指针
