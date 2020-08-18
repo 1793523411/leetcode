@@ -146,3 +146,4 @@ return false;   // change return value to fit specific problem
 
 自己分析其他问题以提高分析能力。别忘了考虑不同的条件。如果很难对所有情况进行分析，请考虑最糟糕的情况。
 ```
++ 几个经典问题：反转链表，移除链表元素，奇偶链表，回文链表
