@@ -157,3 +157,6 @@ class DoublyListNode {
     DoublyListNode(int x) {val = x;}
 }
 ```
+
+**链表和其他数据结构之间时间复杂度的比较**
+![](https://aliyun-lc-upload.oss-cn-hangzhou.aliyuncs.com/aliyun-lc-upload/uploads/2018/04/29/screen-shot-2018-04-28-at-174531.png)
