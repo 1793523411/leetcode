@@ -77,13 +77,14 @@ int* buildNext(char* P) { // 构造模式串 P 的 next 表
 }
 ```
 
-+ 双指针技巧：从两端向中间迭代数组，经常在排序数组中使用
-+ 比如反转数组中的元素，经典双指针问题，
-+ 双指针的方法可以相同也可以不同，上面做的都是反方向的双指针，接下来该同方向的双指针了，即快慢指针，明天开启这一篇章
-+ 解决这类问题的关键是: 确定两个指针的移动策略。
-+ 与前一个场景类似，你有时可能需要在使用双指针技巧之前对数组进行排序，也可能需要运用贪心法则来决定你的运动策略
+- 双指针技巧：从两端向中间迭代数组，经常在排序数组中使用
+- 比如反转数组中的元素，经典双指针问题，
+- 双指针的方法可以相同也可以不同，上面做的都是反方向的双指针，接下来该同方向的双指针了，即快慢指针，明天开启这一篇章
+- 解决这类问题的关键是: 确定两个指针的移动策略。
+- 与前一个场景类似，你有时可能需要在使用双指针技巧之前对数组进行排序，也可能需要运用贪心法则来决定你的运动策略
 
 快慢指针实例：给你一个数组 nums 和一个值 val，你需要 原地 移除所有数值等于 val 的元素，并返回移除后数组的新长度
+
 ```python
 def removeElement(self, nums: List[int], val: int) -> int:
     slow = 0
@@ -95,11 +96,11 @@ def removeElement(self, nums: List[int], val: int) -> int:
     return slow
 ```
 
-+ 我们可以调用内置函数来对数组进行排序。但是，理解一些广泛使用的排序算法的原理及其复杂度是很有用的，二分查找是一种重要的技术，用于在排序数组中搜索特定的元素，双指针技巧有时与贪心算法有关，它可以帮助我们设计指针的移动策略
+- 我们可以调用内置函数来对数组进行排序。但是，理解一些广泛使用的排序算法的原理及其复杂度是很有用的，二分查找是一种重要的技术，用于在排序数组中搜索特定的元素，双指针技巧有时与贪心算法有关，它可以帮助我们设计指针的移动策略
 
 ## 链表
 
-+ 单链表的基本结构
+- 单链表的基本结构
 
 ```java
 // Definition for singly-linked list.
@@ -110,8 +111,8 @@ public class SinglyListNode {
 }
 ```
 
-+ 给定一个链表，判断链表中是否有环？引出双指针，在链表中使用两个速度不同的指针，这两个指针的适当速度应该是多少？一个安全的选择是每次移动慢指针一步，而移动快指针两步。每一次迭代，快速指针将额外移动一步。如果环的长度为 M，经过 M 次迭代后，快指针肯定会多绕环一周，并赶上慢指针
-+ 链表中的双指针模板
+- 给定一个链表，判断链表中是否有环？引出双指针，在链表中使用两个速度不同的指针，这两个指针的适当速度应该是多少？一个安全的选择是每次移动慢指针一步，而移动快指针两步。每一次迭代，快速指针将额外移动一步。如果环的长度为 M，经过 M 次迭代后，快指针肯定会多绕环一周，并赶上慢指针
+- 链表中的双指针模板
 
 ```java
 // Initialize slow & fast pointers
@@ -130,9 +131,10 @@ while (slow != null && fast != null && fast.next != null) {
 }
 return false;   // change return value to fit specific problem
 ```
-+ 在调用 next 字段之前，始终检查节点是否为空。获取空节点的下一个节点将导致空指针错误。例如，在我们运行 fast = fast.next.next 之前，需要检查 fast 和 fast.next 不为空。
-+ 仔细定义循环的结束条件。
-+ 复杂度分析
+
+- 在调用 next 字段之前，始终检查节点是否为空。获取空节点的下一个节点将导致空指针错误。例如，在我们运行 fast = fast.next.next 之前，需要检查 fast 和 fast.next 不为空。
+- 仔细定义循环的结束条件。
+- 复杂度分析
 
 ```
 空间复杂度分析容易。如果只使用指针，而不使用任何其他额外的空间，那么空间复杂度将是 O(1)。但是，时间复杂度的分析比较困难。为了得到答案，我们需要分析运行循环的次数。
@@ -146,8 +148,9 @@ return false;   // change return value to fit specific problem
 
 自己分析其他问题以提高分析能力。别忘了考虑不同的条件。如果很难对所有情况进行分析，请考虑最糟糕的情况。
 ```
-+ 几个经典问题：反转链表，移除链表元素，奇偶链表，回文链表
-+ 双链表数据结构定义
+
+- 几个经典问题：反转链表，移除链表元素，奇偶链表，回文链表
+- 双链表数据结构定义
 
 ```java
 // Definition for doubly-linked list.
@@ -163,8 +166,207 @@ class DoublyListNode {
 
 ## 哈希表
 
-+ 有两种不同类型的哈希表：哈希集合和哈希映射，在标准模板库的帮助下，哈希表是易于使用的。大多数常见语言（如Java，C ++ 和 Python）都支持哈希集合和哈希映射，通过选择合适的哈希函数，哈希表可以在插入和搜索方面实现出色的性能
-+ 哈希表的关键思想是使用哈希函数将键映射到存储桶，当我们插入一个新的键时，哈希函数将决定该键应该分配到哪个桶中，并将该键存储在相应的桶中；当我们想要搜索一个键时，哈希表将使用相同的哈希函数来查找对应的桶，并只在特定的桶中进行搜索。
-+ 哈希函数的设计是一个开放的问题。其思想是尽可能将键分配到桶中，理想情况下，如果我们的哈希函数是完美的一对一映射，我们将不需要处理冲突。不幸的是，在大多数情况下，哈希函数并不完美，冲突几乎是不可避免的，它需要在桶的数量和桶的容量之间进行权衡
-+ 假设存储最大键数的桶有 N 个键，通常，如果 N 是常数且很小，我们可以简单地使用一个数组将键存储在同一个桶中。如果 N 是可变的或很大，我们可能需要使用高度平衡的二叉树来代替
-+ 插入和搜索是哈希表中的两个基本操作，此外，还有基于这两个操作的操作。例如，当我们删除元素时，我们将首先搜索元素，然后在元素存在的情况下从相应位置移除元素
+- 有两种不同类型的哈希表：哈希集合和哈希映射，在标准模板库的帮助下，哈希表是易于使用的。大多数常见语言（如 Java，C ++ 和 Python）都支持哈希集合和哈希映射，通过选择合适的哈希函数，哈希表可以在插入和搜索方面实现出色的性能
+- 哈希表的关键思想是使用哈希函数将键映射到存储桶，当我们插入一个新的键时，哈希函数将决定该键应该分配到哪个桶中，并将该键存储在相应的桶中；当我们想要搜索一个键时，哈希表将使用相同的哈希函数来查找对应的桶，并只在特定的桶中进行搜索。
+- 哈希函数的设计是一个开放的问题。其思想是尽可能将键分配到桶中，理想情况下，如果我们的哈希函数是完美的一对一映射，我们将不需要处理冲突。不幸的是，在大多数情况下，哈希函数并不完美，冲突几乎是不可避免的，它需要在桶的数量和桶的容量之间进行权衡
+- 假设存储最大键数的桶有 N 个键，通常，如果 N 是常数且很小，我们可以简单地使用一个数组将键存储在同一个桶中。如果 N 是可变的或很大，我们可能需要使用高度平衡的二叉树来代替
+- 插入和搜索是哈希表中的两个基本操作，此外，还有基于这两个操作的操作。例如，当我们删除元素时，我们将首先搜索元素，然后在元素存在的情况下从相应位置移除元素
+- 官方哈希表解决方案：
+
+哈希集合
+
+```java
+class MyHashSet {
+    private final int MAX_LEN = 100000; // the amount of buckets
+    private List<Integer>[] set;      // hash set implemented by array
+
+    /** Returns the corresponding bucket index. */
+    private int getIndex(int key) {
+        return key % MAX_LEN;
+    }
+
+    /** Search the key in a specific bucket. Returns -1 if the key does not existed. */
+    private int getPos(int key, int index) {
+        // Each bucket contains a list.
+        List<Integer> temp = set[index];
+        if (temp == null) {
+            return -1;
+        }
+        // Iterate all the elements in the bucket to find the target key.
+        for (int i = 0; i < temp.size(); ++i) {
+            if (temp.get(i) == key) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Initialize your data structure here. */
+    public MyHashSet() {
+        set = (List<Integer>[])new ArrayList[MAX_LEN];
+    }
+
+    public void add(int key) {
+        int index = getIndex(key);
+        int pos = getPos(key, index);
+        if (pos < 0) {
+            // Add new key if key does not exist.
+            if (set[index] == null) {
+                set[index] = new ArrayList<Integer>();
+            }
+            set[index].add(key);
+        }
+    }
+
+    public void remove(int key) {
+        int index = getIndex(key);
+        int pos = getPos(key, index);
+        if (pos >= 0) {
+            // Remove the key if key exists.
+            set[index].remove(pos);
+        }
+    }
+
+    /** Returns true if this set did not already contain the specified element */
+    public boolean contains(int key) {
+        int index = getIndex(key);
+        int pos = getPos(key, index);
+        return pos >= 0;
+    }
+}
+
+```
+
+哈希映射
+
+> 当一个函数返回两个值并且两个值都有重要意义时我们一般会用 Map 的 key 和 value 来表达，但是这样的话就需要两个键值对，用 Map 映射去做处理时，此时的 key 相当于 value 的一个描述或者引用，而具体的信息都保存在 value 中，我们可以通过 key 去获取对应的 value。但是当 key 和 value 都保存具体信息时，我们就需要用到 Pair 对了。Pair 对也是键值对的形式,在 javax.util 包下，有一个简单 Pair 类可以直接调用，用法是直接通过构造函数将所吸引类型的 Key 和 value 存入，这个 key 和 value 没有任何的对应关系类型也是任意定的
+
+```java
+import javafx.util.Pair;
+
+class MyHashMap {
+    private final int MAX_LEN = 100000;             // the amount of buckets
+    private List<Pair<Integer, Integer>>[] map;     // hash map implemented by array
+
+    /** Returns the corresponding bucket index. */
+    private int getIndex(int key) {
+        return key % MAX_LEN;
+    }
+
+    /** Search the key in a specific bucket. Returns -1 if the key does not existed. */
+    private int getPos(int key, int index) {
+        // Each bucket contains a list.
+        List<Pair<Integer, Integer>> temp = map[index];
+        if (temp == null) {
+            return -1;
+        }
+        // Iterate all the elements in the bucket to find the target key.
+        for (int i = 0; i < temp.size(); ++i) {
+            if (temp.get(i).getKey() == key) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /** Initialize your data structure here. */
+    public MyHashMap() {
+        map = (List<Pair<Integer, Integer>>[])new ArrayList[MAX_LEN];
+    }
+
+    /** value will always be positive. */
+    public void put(int key, int value) {
+        int index = getIndex(key);
+        int pos = getPos(key, index);
+        if (pos < 0) {
+            // Add new (key, value) pair if key is not existed.
+            if (map[index] == null) {
+                map[index] = new ArrayList<Pair<Integer, Integer>>();
+            }
+            map[index].add(new Pair(key, value));
+        } else {
+            // Update the value if key is existed.
+            map[index].set(pos, new Pair(key, value));
+        }
+    }
+
+    /** Returns the value to which the specified key is mapped, or -1 if this map contains no mapping for the key */
+    public int get(int key) {
+        int index = getIndex(key);
+        int pos = getPos(key, index);
+        if (pos < 0) {
+            return -1;
+        } else {
+            return map[index].get(pos).getValue();
+        }
+    }
+
+    /** Removes the mapping of the specified value key if this map contains a mapping for the key */
+    public void remove(int key) {
+        int index = getIndex(key);
+        int pos = getPos(key, index);
+        if (pos >= 0) {
+            map[index].remove(pos);
+        }
+    }
+}
+```
+
+- 我们来看看 “删除” 操作。在找到元素的位置之后，我们需要从数组列表中删除元素,内置函数中使用的策略是把第 i 个元素后的所有元素向前移动一个位置。也就是说，你必须移动 n - i 次。因此，从数组列表中删除元素的时间复杂度将为 O(n),考虑 i 取不同值的情况。平均而言，我们将移动 ((n - 1) + (n - 2) + ... + 1 + 0) / n = (n - 1) / 2 次,希望有两种解决方案可以将时间复杂度从 O(n) 降低到 O(1)
+- 交换:我们可以使用一种巧妙的策略。首先，用存储桶中的最后一个元素交换要移除的元素。然后删除最后一个元素。通过这种方法，我们成功地在 O(1) 的时间复杂度中去除了元素
+- 链表:实现此目标的另一种方法是使用链表而不是数组列表。通过这种方式，我们可以在不修改列表中的顺序的情况下删除元素。该策略时间复杂度为 O(1)
+- 哈希表的复杂度分析：如果总共有 M 个键，那么在使用哈希表时，可以很容易地达到 O(M) 的空间复杂度，但是，哈希表的时间复杂度与设计有很强的关系，我们中的大多数人可能已经在每个桶中使用数组来将值存储在同一个桶中，理想情况下，桶的大小足够小时，可以看作是一个常数。插入和搜索的时间复杂度都是 O(1)，但在最坏的情况下，桶大小的最大值将为 N。插入时时间复杂度为 O(1)，搜索时为 O(N)
+- 内置哈希表的典型设计是：键值可以是任何可哈希化的类型。并且属于可哈希类型的值将具有哈希码。此哈希码将用于映射函数以获取存储区索引；每个桶包含一个数组，用于在初始时将所有值存储在同一个桶中；如果在同一个桶中有太多的值，这些值将被保留在一个高度平衡的**二叉树搜索树**中，插入和搜索的平均时间复杂度仍为 O(1)。最坏情况下插入和搜索的时间复杂度是 O(logN)，使用高度平衡的 BST。这是在插入和搜索之间的一种权衡
+- 哈希集是集合的实现之一，它是一种存储不重复值的数据结构
+
+```java
+// "static void main" must be defined in a public class.
+public class Main {
+    public static void main(String[] args) {
+        // 1. initialize the hash set
+        Set<Integer> hashSet = new HashSet<>();
+        // 2. add a new key
+        hashSet.add(3);
+        hashSet.add(2);
+        hashSet.add(1);
+        // 3. remove the key
+        hashSet.remove(2);
+        // 4. check if the key is in the hash set
+        if (!hashSet.contains(2)) {
+            System.out.println("Key 2 is not in the hash set.");
+        }
+        // 5. get the size of the hash set
+        System.out.println("The size of has set is: " + hashSet.size());
+        // 6. iterate the hash set
+        for (Integer i : hashSet) {
+            System.out.print(i + " ");
+        }
+        System.out.println("are in the hash set.");
+        // 7. clear the hash set
+        hashSet.clear();
+        // 8. check if the hash set is empty
+        if (hashSet.isEmpty()) {
+            System.out.println("hash set is empty now!");
+        }
+    }
+}
+```
+
+- 插入新值并检查值是否在哈希集中是简单有效的,因此，通常，使用哈希集来检查该值是否已经出现过
+- 给定一个整数数组，查找数组是否包含任何重复项。这是一个典型的问题，可以通过哈希集来解决,可以简单地迭代每个值并将值插入集合中。 如果值已经在哈希集中，则存在重复
+
+```java
+boolean findDuplicates(List<Type>& keys) {
+    // Replace Type with actual type of your key
+    Set<Type> hashset = new HashSet<>();
+    for (Type key : keys) {
+        if (hashset.contains(key)) {
+            return true;
+        }
+        hashset.insert(key);
+    }
+    return false;
+}
+```
+
+- 
