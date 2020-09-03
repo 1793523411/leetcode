@@ -1,0 +1,1 @@
+python无限长，无限骚：`return str(int(num1)*int(num2))`
