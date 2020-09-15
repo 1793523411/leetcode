@@ -1,6 +1,8 @@
 `https://leetcode-cn.com/problems/binary-tree-preorder-traversal/solution/leetcodesuan-fa-xiu-lian-dong-hua-yan-shi-xbian-2/`
 # 有关二叉树的前中后序遍历
 
+前中后：144，94，145
+
 ## 递归解法
 
 ```java
