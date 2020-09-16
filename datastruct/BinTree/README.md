@@ -107,6 +107,7 @@ public static void inOrderIteration(TreeNode head) {
 
 然后将这个结果返回来，这里是利用栈的先进后出倒序打印。
 
+方法一：两个栈
 ```java
 public static void postOrderIteration(TreeNode head) {
 		if (head == null) {
@@ -130,4 +131,172 @@ public static void postOrderIteration(TreeNode head) {
 		}
 	}
 
+```
+方法二：用一个指针
+```java
+public static void postOrderIteration2(TreeNode head) { 感谢[@ben-ben-niu](/u/ben-ben-niu/)指出错误，代码确实存在问题，已经在原文中修复
+	if (head == null) {
+		return;
+	}
+	TreeNode cur = head;
+	Stack<TreeNode> stack = new Stack<>();
+	stack.push(head);
+	while (!stack.isEmpty()) {
+		TreeNode peek = stack.peek();
+		if (peek.left != null && peek.left != cur && peek.right != cur) {
+			stack.push(peek.left);
+		} else if (peek.right != null && peek.right != cur) {
+			stack.push(peek.right);
+		} else {
+			System.out.print(stack.pop().val + " ");
+			cur = peek;
+		}
+	}
+}
+```
+
+## Morris解法
+
+模板
+```java
+public static void preOrderMorris(TreeNode head) {
+	if (head == null) {
+		return;
+	}
+	TreeNode cur1 = head;//当前开始遍历的节点
+	TreeNode cur2 = null;//记录当前结点的左子树
+	while (cur1 != null) {
+		cur2 = cur1.left;
+		if (cur2 != null) {
+			while (cur2.right != null && cur2.right != cur1) {//找到当前左子树的最右侧节点，且这个节点应该在指向根结点之前，否则整个节点又回到了根结点。
+				cur2 = cur2.right;
+			}
+			if (cur2.right == null) {//这个时候如果最右侧这个节点的右指针没有指向根结点，创建连接然后往下一个左子树的根结点进行连接操作。
+				cur2.right = cur1;
+				cur1 = cur1.left;
+				continue;
+			} else {//当左子树的最右侧节点有指向根结点，此时说明我们已经回到了根结点并重复了之前的操作，同时在回到根结点的时候我们应该已经处理完 左子树的最右侧节点 了，把路断开。
+				cur2.right = null;
+			}
+		} 
+		cur1 = cur1.right;//一直往右边走，参考图
+	}
+}
+
+```
+
+### 前序
+```java
+public static void preOrderMorris(TreeNode head) {
+	if (head == null) {
+		return;
+	}
+	TreeNode cur1 = head;
+	TreeNode cur2 = null;
+	while (cur1 != null) {
+		cur2 = cur1.left;
+		if (cur2 != null) {
+			while (cur2.right != null && cur2.right != cur1) {
+				cur2 = cur2.right;
+			}
+			if (cur2.right == null) {
+				cur2.right = cur1;
+				System.out.print(cur1.value + " ");
+				cur1 = cur1.left;
+				continue;
+			} else {
+				cur2.right = null;
+			}
+		} else {
+			System.out.print(cur1.value + " ");
+		}
+		cur1 = cur1.right;
+	}
+}
+```
+
+### 中序
+
+```java
+public static void inOrderMorris(TreeNode head) {
+	if (head == null) {
+		return;
+	}
+	TreeNode cur1 = head;
+	TreeNode cur2 = null;
+	while (cur1 != null) {
+		cur2 = cur1.left;
+		//构建连接线
+		if (cur2 != null) {
+			while (cur2.right != null && cur2.right != cur1) {
+				cur2 = cur2.right;
+			}
+			if (cur2.right == null) {
+				cur2.right = cur1;
+				cur1 = cur1.left;
+				continue;
+			} else {
+				cur2.right = null;
+			}
+		}
+		System.out.print(cur1.value + " ");
+		cur1 = cur1.right;
+	}
+}
+```
+
+### **后序**
+
+我们将一个节点的连续右节点当成一个单链表来看待。
+当我们返回上层之后，也就是将连线断开的时候，打印下层的单链表,那么我们只需要将这个单链表逆序打印就行了
+
+```java
+//后序Morris
+public static void postOrderMorris(TreeNode head) {
+	if (head == null) {
+		return;
+	}
+	TreeNode cur1 = head;//遍历树的指针变量
+	TreeNode cur2 = null;//当前子树的最右节点
+	while (cur1 != null) {
+		cur2 = cur1.left;
+		if (cur2 != null) {
+			while (cur2.right != null && cur2.right != cur1) {
+				cur2 = cur2.right;
+			}
+			if (cur2.right == null) {
+				cur2.right = cur1;
+				cur1 = cur1.left;
+				continue;
+			} else {
+				cur2.right = null;
+				postMorrisPrint(cur1.left);
+			}
+		}
+		cur1 = cur1.right;
+	}
+	postMorrisPrint(head);
+}
+//打印函数
+public static void postMorrisPrint(TreeNode head) {
+	TreeNode reverseList = postMorrisReverseList(head);
+	TreeNode cur = reverseList;
+	while (cur != null) {
+		System.out.print(cur.value + " ");
+		cur = cur.right;
+	}
+	postMorrisReverseList(reverseList);
+}
+//翻转单链表
+public static TreeNode postMorrisReverseList(TreeNode head) {
+	TreeNode cur = head;
+	TreeNode pre = null;
+	while (cur != null) {
+		TreeNode next = cur.right;
+		cur.right = pre;
+		pre = cur;
+		cur = next;
+	}
+	return pre;
+}
 ```
