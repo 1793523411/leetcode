@@ -470,3 +470,35 @@ ReturnType aggregateByKey_hashmap(List<Type>& keys) {
 + 当你删除树中的节点时，删除过程将按照后序遍历的顺序进行。 也就是说，当你删除一个节点时，你将首先删除它的左节点和它的右边的节点，然后再删除节点本身
 + 另外，后序在数学表达中被广泛使用。 编写程序来解析后缀表示法更为容易，可以使用中序遍历轻松找出原始表达式。 但是程序处理这个表达式时并不容易，因为你必须检查操作的优先级，如果你想对这棵树进行后序遍历，使用栈来处理表达式会变得更加容易。 每遇到一个操作符，就可以从栈中弹出栈顶的两个元素，计算并将结果返回到栈中
 + 层序遍历就是逐层遍历树结构,广度优先搜索是一种广泛运用在树或图这类数据结构中，遍历或搜索的算法。 该算法从一个根节点开始，首先访问节点本身。 然后遍历它的相邻节点，其次遍历它的二级邻节点、三级邻节点，以此类推,当我们在树中进行广度优先搜索时，我们访问的节点的顺序是按照层序遍历顺序的
++ 自顶向下的递归：“自顶向下” 意味着在每个递归层级，我们将首先访问节点来计算一些值，并在递归调用函数时将这些值传递到子节点。 所以 “自顶向下” 的解决方案可以被认为是一种前序遍历
++ z自顶向下求一棵二叉树最大深度
+
+```java
+private int answer;		// don't forget to initialize answer before call maximum_depth
+private void maximum_depth(TreeNode root, int depth) {
+    if (root == null) {
+        return;
+    }
+    if (root.left == null && root.right == null) {
+        answer = Math.max(answer, depth);
+    }
+    maximum_depth(root.left, depth + 1);
+    maximum_depth(root.right, depth + 1);
+}
+```
++ “自底向上” 是另一种递归方法。 在每个递归层次上，我们首先对所有子节点递归地调用函数，然后根据返回值和根节点本身的值得到答案。 这个过程可以看作是后序遍历的一种
++ 自底向上求最大深度
+
+```java
+public int maximum_depth(TreeNode root) {
+	if (root == null) {
+		return 0;                                   // return 0 for null node
+	}
+	int left_depth = maximum_depth(root.left);
+	int right_depth = maximum_depth(root.right);
+	return Math.max(left_depth, right_depth) + 1;	// return depth of the subtree rooted at root
+}
+```
++ 何时使用自顶向下：你能确定一些参数，从该节点自身解决出发寻找答案吗？你可以使用这些参数和节点本身的值来决定什么应该是传递给它子节点的参数吗？如果答案都是肯定的，那么请尝试使用 “自顶向下” 的递归来解决此问题
++ 何时使用自底向上：对于树中的任意一个节点，如果你知道它子节点的答案，你能计算出该节点的答案吗？ 如果答案是肯定的，那么 “自底向上” 的递归可能是一个不错的解决方法
+
