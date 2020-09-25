@@ -8,6 +8,7 @@ class Solution {
      *     TreeNode(int x) { val = x; }
      * }
      */
+    //中序遍历
     long pre = Long.MIN_VALUE;
     public boolean isValidBST(TreeNode root) {
         if (root == null) {
