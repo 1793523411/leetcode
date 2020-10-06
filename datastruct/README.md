@@ -582,3 +582,60 @@ class TrieNode {
 - 前缀树的插入操作：当我们在二叉搜索树中插入目标值时，在每个节点中，我们都需要根据 节点值 和 目标值 之间的关系，来确定目标值需要去往哪个子节点。同样地，当我们向前缀树中插入一个目标值时，我们也需要根据插入的 目标值 来决定我们的路径,更具体地说，如果我们在前缀树中插入一个字符串 S，我们要从根节点开始。 我们将根据 `S[0]`（S中的第一个字符），选择一个子节点或添加一个新的子节点。然后到达第二个节点，并根据 `S[1]` 做出选择。 再到第三个节点，以此类推。 最后，我们依次遍历 S 中的所有字符并到达末尾。 末端节点将是表示字符串 S 的节点,通常情况情况下，你需要自己构建前缀树。构建前缀树实际上就是多次调用插入函数。但请记住在插入字符串之前要 初始化根节点
 - 搜索前缀:正如我们在前缀树的简介中提到的，所有节点的后代都与该节点相对应字符串的有着共同前缀。因此，很容易搜索以特定前缀开头的任何单词,同样地，我们可以根据给定的前缀沿着树形结构搜索下去。一旦我们找不到我们想要的子节点，搜索就以失败终止。
 - 搜索单词：我们可以将这个词作为前缀，并同样按照上述同样的方法进行搜索。如果搜索失败，那么意味着没有单词以目标单词开头，那么目标单词绝对不会存在于前缀树中。如果搜索成功，我们需要检查目标单词是否是前缀树中单词的前缀，或者它本身就是一个单词。为了进一步解决这个问题，你可能需要稍对节点的结构做出修改。**往每个节点中加入布尔值可能会有效地帮助你解决这个问题。**
+- 实现前缀树
+
+```java
+class Trie {
+    class TrieNode {
+        public boolean isWord;
+        public Map<Character, TrieNode> childrenMap = new HashMap<>();
+    }
+
+    private TrieNode root;
+
+    /** Initialize your data structure here. */
+    public Trie() {
+        root = new TrieNode();
+    }
+
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        TrieNode cur = root;
+        for(int i = 0; i < word.length(); i++){
+            char c = word.charAt(i);
+            if(cur.childrenMap.get(c) == null){
+                // insert a new node if the path does not exist
+                cur.childrenMap.put(c, new TrieNode());
+            }
+            cur = cur.childrenMap.get(c);
+        }
+        cur.isWord = true;
+    }
+
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        TrieNode cur = root;
+        for(int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);
+            if(cur.childrenMap.get(c) == null) {
+                return false;
+            }
+            cur = cur.childrenMap.get(c);
+        }
+        return cur.isWord;
+    }
+
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+        TrieNode cur = root;
+        for(int i = 0;i < prefix.length(); i++){
+            char c = prefix.charAt(i);
+            if(cur.childrenMap.get(c) == null) {
+                return false;
+            }
+            cur = cur.childrenMap.get(c);
+        }
+        return true;
+    }
+}
+```
