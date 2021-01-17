@@ -40,9 +40,9 @@ var minArray = function(numbers) {
 
 `nums[mid] > nums[right]` : 最小元素肯定在mid的右边，所以 left = mid + 1
 
-`nums[mid] == nums[right]`: 此时 mid 可能处于左边区间，也可能处于右边区间，即最小元素不确定在它的左边还是右边,所以 right-- ，换一个 `nums[right]` 再试`nums[mid] < nums[right]`
+`nums[mid] == nums[right]`: 此时 mid 可能处于左边区间，也可能处于右边区间，即最小元素不确定在它的左边还是右边,所以 right-- ，换一个 `nums[right]` 
 
-此时 mid 肯定处在右边的增区间，所以 right = mid
+再试`nums[mid] < nums[right]`:此时 mid 肯定处在右边的增区间，所以 right = mid
 
 
 ```js
