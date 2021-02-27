@@ -47,3 +47,30 @@ var reverseList = function (head) {
 ```
 
 ## 使用栈
+
+```js
+var reverseList = function(head) {
+    //处理特殊情况
+    if(head===null){
+        return null;
+    }
+    //创建栈用来存储链表节点
+    var stack=[];
+    while(head!==null){
+        stack.push(head);
+        head=head.next;
+    }
+    //记录新链表的头节点即老链表的尾节点
+    var newHead=stack[stack.length-1];
+    //反转链表
+    while(stack.length>1){
+        var node=stack.pop();
+        node.next=stack[stack.length-1];
+    }
+    //处理剩余的一个节点，防止产生环
+    var tmp=stack.pop();
+    tmp.next=null;
+    
+    return newHead;
+};
+```
